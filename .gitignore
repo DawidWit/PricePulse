@@ -1,1 +1,3 @@
 services/scraper-service/venv
+node_modules/
+.env
