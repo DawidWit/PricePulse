@@ -1,12 +1,18 @@
 const { body, validationResult } = require("express-validator");
-const { SUPPORTED_SOURCES } = require("../config/source");
+const { SUPPORTED_SOURCES, SUPPORTED_CURRENCIES } = require("../config/source");
 
 const sanitizeWatchedItem = [
-  body("url").isURL().withMessage("Invalid URL").trim().escape(),
+  body("item").isString().withMessage("No item provided"),
 
   body("source")
     .isIn(SUPPORTED_SOURCES)
     .withMessage(`Source must be one of: ${SUPPORTED_SOURCES.join(", ")}`)
+    .trim()
+    .escape(),
+
+  body("currency")
+    .isIn(SUPPORTED_CURRENCIES)
+    .withMessage(`Currency must be one of: ${SUPPORTED_CURRENCIES.join(", ")}`)
     .trim()
     .escape(),
 
